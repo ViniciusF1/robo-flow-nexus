@@ -8,7 +8,7 @@ type MetricType = "processes" | "time" | "accuracy" | "efficiency";
 
 interface MetricsCardProps {
   type: MetricType;
-  value: string;
+  value: number | React.ReactNode;
   label: string;
   change?: string;
   isPositive?: boolean;

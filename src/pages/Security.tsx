@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { TabsContent, TabsList, TabsTrigger, Tabs } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { CheckCircle2, Shield, Lock, FileText, Users, Eye, Database, Cloud, Server, FileCode, AlertCircle } from "lucide-react";
+import { CheckCircle2, Shield, Lock, FileText, Users, Eye, Database, Cloud, Server, FileCode, AlertCircle, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import ChatBot from "@/components/ChatBot";
 

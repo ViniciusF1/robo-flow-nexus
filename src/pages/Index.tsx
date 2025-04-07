@@ -87,7 +87,7 @@ const Index = () => {
               <div className="relative">
                 <MetricsCard
                   type="processes"
-                  value={<AnimatedNumber end={1458} className="text-2xl font-bold" />}
+                  value={1458}
                   label="Processes Automated"
                   change="12% this month"
                   isPositive
@@ -97,11 +97,7 @@ const Index = () => {
               <div className="relative">
                 <MetricsCard
                   type="time"
-                  value={<AnimatedNumber 
-                    end={4823} 
-                    formatter={(val) => `${val.toLocaleString()} hrs`} 
-                    className="text-2xl font-bold" 
-                  />}
+                  value={4823}
                   label="Time Saved"
                   change="8% this month"
                   isPositive
@@ -111,11 +107,7 @@ const Index = () => {
               <div className="relative">
                 <MetricsCard
                   type="accuracy"
-                  value={<AnimatedNumber 
-                    end={98} 
-                    formatter={(val) => `${val}%`} 
-                    className="text-2xl font-bold" 
-                  />}
+                  value={98}
                   label="Task Accuracy"
                   change="2% this month"
                   isPositive
@@ -125,11 +117,7 @@ const Index = () => {
               <div className="relative">
                 <MetricsCard
                   type="efficiency"
-                  value={<AnimatedNumber 
-                    end={35} 
-                    formatter={(val) => `${val}%`} 
-                    className="text-2xl font-bold" 
-                  />}
+                  value={35}
                   label="Productivity Increase"
                   change="5% this month"
                   isPositive
