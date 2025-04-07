@@ -10,6 +10,7 @@ import Features from "./pages/Features";
 import UseCases from "./pages/UseCases";
 import Security from "./pages/Security";
 import NotFound from "./pages/NotFound";
+import SplineRobot from "./components/SplineRobot";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <SplineRobot />
       <BrowserRouter>
         <AnimatePresence mode="wait">
           <Routes>
