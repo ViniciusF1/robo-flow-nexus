@@ -1,50 +1,22 @@
 
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
-const SmoothScroll: React.FC = () => {
+// This component enables smooth scrolling behavior across the site
+const SmoothScroll = () => {
   useEffect(() => {
-    // Add smooth scroll behavior to the document
+    // Save original styles
+    const originalStyle = window.getComputedStyle(document.documentElement).scrollBehavior;
+    
+    // Apply smooth scrolling
     document.documentElement.style.scrollBehavior = 'smooth';
     
-    // Add custom class to body for better scrolling
-    document.body.classList.add('custom-scroll');
-    
-    // Add CSS for custom scrollbar
-    const style = document.createElement('style');
-    style.textContent = `
-      .custom-scroll {
-        overflow-y: overlay;
-      }
-      
-      /* Custom scrollbar */
-      .custom-scroll::-webkit-scrollbar {
-        width: 6px;
-      }
-      
-      .custom-scroll::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      
-      .custom-scroll::-webkit-scrollbar-thumb {
-        background: rgba(122, 40, 203, 0.4);
-        border-radius: 10px;
-      }
-      
-      .custom-scroll::-webkit-scrollbar-thumb:hover {
-        background: rgba(122, 40, 203, 0.7);
-      }
-    `;
-    document.head.appendChild(style);
-    
-    // Clean up
+    // Clean up function to restore original style
     return () => {
-      document.documentElement.style.scrollBehavior = '';
-      document.body.classList.remove('custom-scroll');
-      document.head.removeChild(style);
+      document.documentElement.style.scrollBehavior = originalStyle;
     };
   }, []);
-  
-  return null; // This is a behavior component, no UI
+
+  return null;
 };
 
 export default SmoothScroll;
