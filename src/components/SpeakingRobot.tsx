@@ -7,9 +7,15 @@ interface Message {
   type: 'robot' | 'thinking';
 }
 
+interface MousePosition {
+  x: number;
+  y: number;
+}
+
 const SpeakingRobot: React.FC = () => {
   const [message, setMessage] = useState<Message | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [mousePosition, setMousePosition] = useState<MousePosition>({ x: 0, y: 0 });
   
   const robotMessages = [
     "Hello! I'm your AI automation assistant.",
@@ -18,6 +24,22 @@ const SpeakingRobot: React.FC = () => {
     "Want to see how I can save you time?",
     "I learn and adapt to your business needs.",
   ];
+  
+  // Track mouse position
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: e.clientX,
+        y: e.clientY
+      });
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
   
   useEffect(() => {
     // Show initial message
@@ -45,6 +67,36 @@ const SpeakingRobot: React.FC = () => {
       setIsAnimating(false);
     }, 1500);
   };
+
+  // Calculate eye movement based on mouse position
+  const calculateEyePosition = (eyeRef: React.RefObject<HTMLDivElement>) => {
+    if (!eyeRef.current) return { x: 0, y: 0 };
+    
+    const eye = eyeRef.current.getBoundingClientRect();
+    const eyeCenterX = eye.left + eye.width / 2;
+    const eyeCenterY = eye.top + eye.height / 2;
+    
+    // Limit eye movement
+    const maxMovement = 1.5;
+    
+    // Calculate direction
+    const deltaX = mousePosition.x - eyeCenterX;
+    const deltaY = mousePosition.y - eyeCenterY;
+    
+    // Normalize and apply max movement
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    const normalizedX = distance > 0 ? deltaX / distance : 0;
+    const normalizedY = distance > 0 ? deltaY / distance : 0;
+    
+    return {
+      x: normalizedX * maxMovement,
+      y: normalizedY * maxMovement
+    };
+  };
+  
+  // Refs for eye positions
+  const leftEyeRef = React.useRef<HTMLDivElement>(null);
+  const rightEyeRef = React.useRef<HTMLDivElement>(null);
   
   return (
     <div className="relative flex flex-col items-center">
@@ -64,19 +116,25 @@ const SpeakingRobot: React.FC = () => {
           {/* Robot face/head */}
           <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full bg-gradient-to-br from-robot-purple/80 to-robot-blue/80 flex items-center justify-center shadow-lg relative">
             {/* Robot eyes */}
-            <div className="absolute top-1/3 left-1/4 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-white shadow-inner">
+            <div ref={leftEyeRef} className="absolute top-1/3 left-1/4 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-white shadow-inner">
               <motion.div 
                 className="w-3 h-3 rounded-full bg-robot-cyan absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
+                animate={{ 
+                  x: leftEyeRef.current ? calculateEyePosition(leftEyeRef).x : 0,
+                  y: leftEyeRef.current ? calculateEyePosition(leftEyeRef).y : 0
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 30, mass: 0.5 }}
               />
             </div>
             
-            <div className="absolute top-1/3 right-1/4 transform translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-white shadow-inner">
+            <div ref={rightEyeRef} className="absolute top-1/3 right-1/4 transform translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-white shadow-inner">
               <motion.div 
                 className="w-3 h-3 rounded-full bg-robot-cyan absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
+                animate={{ 
+                  x: rightEyeRef.current ? calculateEyePosition(rightEyeRef).x : 0,
+                  y: rightEyeRef.current ? calculateEyePosition(rightEyeRef).y : 0
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 30, mass: 0.5 }}
               />
             </div>
             
