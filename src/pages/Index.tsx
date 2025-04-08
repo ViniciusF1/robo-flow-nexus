@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -9,7 +10,6 @@ import FeatureCard from "@/components/FeatureCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import AnimatedNumber from "@/components/AnimatedNumber";
 import ChatBot from "@/components/ChatBot";
-import SplineRobot from "@/components/SplineRobot";
 import { ArrowRight, Activity, Braces, Workflow, Shield, BarChart3, Cloud, CheckCircle2, PenTool, Bot, Clock } from "lucide-react";
 
 const Index = () => {
@@ -17,9 +17,59 @@ const Index = () => {
     <>
       <Navbar />
       <div className="min-h-screen">
-        <section className="relative flex items-center justify-center h-screen bg-black">
-          <div className="max-w-7xl mx-auto w-full h-full flex items-center justify-center">
-            <SplineRobot />
+        {/* Hero Section */}
+        <section className="pt-32 pb-16 md:pt-40 md:pb-20 px-4 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-purple-50 to-white dark:from-gray-900 dark:to-robot-dark -z-10"></div>
+          <div className="grid-pattern absolute inset-0 opacity-30 -z-10"></div>
+          
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center max-w-3xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
+                  AI-Powered <span className="text-gradient">Automation</span> for Enterprise Workflows
+                </h1>
+                <p className="text-xl mb-8 text-gray-600 dark:text-gray-300">
+                  Streamline operations, reduce errors, and save valuable time with our intelligent AI agent platform.
+                </p>
+                <div className="flex flex-col sm:flex-row justify-center gap-4">
+                  <Button className="bg-gradient-to-r from-robot-purple to-robot-blue text-white px-8 py-6 text-lg">
+                    Get Started Free
+                  </Button>
+                  <Button variant="outline" className="px-8 py-6 text-lg">
+                    Schedule Demo
+                  </Button>
+                </div>
+              </motion.div>
+              
+              <motion.div
+                className="mt-12 relative"
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              >
+                <div className="relative rounded-xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800">
+                  <div className="bg-white dark:bg-gray-900 p-2">
+                    <div className="flex space-x-2 absolute top-4 left-4 z-10">
+                      <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <img 
+                      src="https://placehold.co/1200x800/3454D1/FFFFFF/png?text=Robot+Automation+Dashboard" 
+                      alt="Robot Automation Dashboard" 
+                      className="rounded-lg shadow-sm w-full"
+                    />
+                  </div>
+                </div>
+                
+                <div className="absolute -bottom-6 -right-12 w-24 h-24 bg-gradient-to-br from-robot-purple to-robot-cyan rounded-full filter blur-xl opacity-50 animate-pulse-glow"></div>
+                <div className="absolute -top-12 -left-12 w-32 h-32 bg-gradient-to-br from-robot-blue to-robot-purple rounded-full filter blur-xl opacity-40 animate-pulse-glow"></div>
+              </motion.div>
+            </div>
           </div>
         </section>
         
