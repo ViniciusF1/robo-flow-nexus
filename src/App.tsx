@@ -10,6 +10,9 @@ import Features from "./pages/Features";
 import UseCases from "./pages/UseCases";
 import Security from "./pages/Security";
 import NotFound from "./pages/NotFound";
+import CursorFollower from "./components/CursorFollower";
+import BackgroundEffects from "./components/BackgroundEffects";
+import SmoothScroll from "./components/SmoothScroll";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +21,9 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <SmoothScroll />
+      <BackgroundEffects />
+      <CursorFollower />
       <BrowserRouter>
         <AnimatePresence mode="wait">
           <Routes>
